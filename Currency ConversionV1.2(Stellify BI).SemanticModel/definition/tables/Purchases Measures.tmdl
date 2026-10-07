@@ -1,0 +1,130 @@
+table 'Purchases Measures'
+	lineageTag: 1f219da0-f660-48c5-95e7-5041d8c09fa6
+
+	measure 'Default Purchases' =
+			
+			SUMX(Trading,Trading[Est Weight]*Trading[Unit Purchase Price])
+		lineageTag: ceb4ae66-457e-47c6-82c2-37f55b643612
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Purchese(Currency) = ```
+			
+			var _Currency = SELECTEDVALUE('Currency Slicer'[Currency],"US Dollar")
+			return
+			SWITCH(TRUE(),
+			_Currency ="US Dollar" ,[USD Purchases],
+			_Currency ="Euro" ,[Euro Purchases],
+			_Currency ="British Pound" ,[Pound Purchases] 
+			)
+			```
+		lineageTag: 844f68c6-afc1-4ad4-90cd-6e0b6243aa4b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'USD Purchases' = SUM(Trading[Purchases(USD)])
+		lineageTag: 9868813f-d8b1-4c2a-8ad8-516ee85dac00
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Euro Purchases' = SUM(Trading[Purchases(Euro)])
+		lineageTag: 8f3757e1-c803-48d1-bfff-4ccce23ef30a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Pound Purchases' = SUM(Trading[Purchases(Pound)])
+		lineageTag: 965739fe-a4e5-4105-8477-9baa945c5c45
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cumulative Purchases' =
+			CALCULATE(
+			    [Purchese(Currency)],
+			    FILTER(ALL(Dates),Dates[Date]<=MAX(Dates[Date])))
+		lineageTag: d8edabab-1f13-43a5-8b9c-e1c1367912e0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Card Purchases (Currency)' =
+			
+			var _Currency = SELECTEDVALUE('Currency Slicer'[Currency],"US Dollar")
+			return
+			SWITCH(TRUE(),
+			_Currency ="US Dollar" ,FORMAT([USD Purchases],"$#,##0"),
+			_Currency ="Euro" ,FORMAT([Euro Purchases],"€#,##0"),
+			_Currency ="British Pound" ,FORMAT([Pound Purchases] ,"£#,##0"),[Default Purchases]
+			)
+		lineageTag: 42394022-3c06-4e22-9793-7023ecde0295
+
+	measure 'Purchases Est Weight Card' = ```
+			
+			var _weight = CALCULATE(SUM(Trading[Est Weight]),FILTER(Trading,NOT(ISBLANK(Trading[Unit Purchase Price]))))
+			return
+			_weight&" Unit"
+			
+			```
+		lineageTag: 700928c2-af83-4dc5-979a-15ce8fde4a74
+
+	measure 'Est weight Purchases' = CALCULATE(SUM(Trading[Est Weight]),FILTER(Trading,NOT(ISBLANK(Trading[Unit Purchase Price]))))
+		lineageTag: 0db7fdb2-ee26-4711-b54a-e9f4e85fea6f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Same Load Date' = ```
+			
+			var samedate = CALCULATE(COUNTROWS(Trading),Trading[Product load]=0)
+			return 
+			"We have "&samedate&" Products that have the EST Date the same as the Confirmed Date"
+			```
+		lineageTag: dd9bd765-7d81-47d8-a4f3-0eb41e5b3a99
+
+	measure 'Missing Load Date' = ```
+			
+			var missingdate = CALCULATE(COUNTROWS(Trading),ISBLANK(Trading[Product load]))
+			return 
+			"We have "&missingdate&" Products without a Load Date"
+			```
+		lineageTag: d8433e0f-b25e-4f7c-8a90-9f1962d9cb0f
+
+	measure 'Total Purchases' = COUNTROWS(Trading)
+		formatString: 0
+		lineageTag: dbc17273-f846-4e3c-807f-4651aa305057
+
+	measure 'Missing Currency Purchases' = ```
+			
+			Var _c = COUNT(Trading[Missing Currency])
+			var _fc = CALCULATE(COUNT(Trading[Missing Currency]),FILTER(Trading,Trading[Missing Currency]="MC"))
+			var _totalfc = CALCULATE([Default Purchases],FILTER(Trading,Trading[Missing Currency]="MC"))
+			var _tc = CALCULATE(COUNT(Trading[Missing Currency]),FILTER(Trading,Trading[Missing Currency]="AC"))
+			return 
+			"From "&_c&" Sold Item, We have "&_fc&" Missing Currency  ("&FORMAT(_totalfc,"#,##0")&" Total Purchase), The other "&_tc&" Item with Available Currency are filtred by the Currency Type in the PIE chart"   
+			
+			```
+		lineageTag: 060470ef-40dd-4c94-8406-7ffed28d1e00
+
+	measure 'TOP Product Purchased' =
+			
+			var _grade = TOPN(1,SUMMARIZE(Grades,Grades[Grade]),[Default Purchases],DESC)
+			var _maxsales = CALCULATE('Purchases Measures'[Purchese(Currency)],Grades[Grade]=_grade)
+			var _allsales = CALCULATE('Purchases Measures'[Purchese(Currency)],ALL(Grades))
+			var _percen = DIVIDE(_maxsales,_allsales)
+			return
+			_grade&" is the top Purchases Product  with "&FORMAT(_maxsales,"#,##0")&" and "&FORMAT(_percen,"Percent")&" Of Product Purchased"
+		lineageTag: 2f6cc19e-8dbd-4f2a-937f-016acb4c59d3
+
+	measure 'Prev Purchases Month' = CALCULATE('Purchases Measures'[Purchese(Currency)],DATEADD(Dates[Date],-1,MONTH))
+		formatString: #,0.00
+		lineageTag: d58fd37b-2de0-4219-83f3-2b6f55e0571b
+
+	partition 'Purchases Measures-16fd338a-3fa6-45e8-880c-1b246851d702' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

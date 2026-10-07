@@ -1,0 +1,85 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "e2923a504835a3ae73c2",
+  "position": {
+    "x": 35.70247933884297,
+    "y": 34.214876033057848,
+    "z": 6000,
+    "height": 60.991735537190081,
+    "width": 60.991735537190081,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "PBI_CV_81BBAD08_3ADD_466C_8819_9FACA21A6B8F",
+    "query": {
+      "queryState": {
+        "imageUrl": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Sales  Measures"
+                    }
+                  },
+                  "Property": "Currency Logo"
+                }
+              },
+              "queryRef": "Sales  Measures.Currency Logo"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "30D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

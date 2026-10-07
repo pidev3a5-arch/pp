@@ -1,0 +1,160 @@
+table 'Sales  Measures'
+	lineageTag: bbd56715-8ed6-4bc3-ae30-4f3725a27ad0
+
+	measure 'Card Sales(Currency)' =
+			
+			var _Currency = SELECTEDVALUE('Currency Slicer'[Currency],"US Dollar")
+			return
+			SWITCH(TRUE(),
+			_Currency ="US Dollar" ,FORMAT([USD Sales],"$#,##0"),
+			_Currency ="Euro" ,FORMAT([Euro Sales],"€#,##0"),
+			_Currency ="British Pound" ,FORMAT([Pound Sales] ,"£#,##0")
+			)
+		lineageTag: 6e1b7074-ae9f-493d-855c-cc7e9df8d350
+
+	measure 'USD Sales' = SUM(Trading[Sales(USD)])
+		formatString: #,0.000
+		lineageTag: e8def855-457f-44e9-90e9-89636d2b09b1
+
+	measure 'Default Sales' =
+			
+			SUMX(Trading,Trading[Est Weight]*Trading[Unit Sales Price])
+		formatString: #,0
+		lineageTag: 4f51c01a-c6d6-4099-b3ae-3c0e830abe90
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Euro Sales' = SUM(Trading[Sales(Euro)])
+		formatString: #,0.000
+		lineageTag: 29a68b9b-22d0-4e06-ae83-c6defbe307c1
+
+	measure 'Pound Sales' = SUM(Trading[Sales(Pound)])
+		formatString: #,0.000
+		lineageTag: 040bddef-b0cf-4caf-85c3-96fd21f4ef3b
+
+	measure 'Cumulative Sales' =
+			CALCULATE(
+			    'Sales  Measures'[Sales(Currency)],
+			    FILTER(ALL(Dates),Dates[Date]<=MAX(Dates[Date])))
+		lineageTag: a4193e18-84ab-4e91-aec6-e64b2bd3eee9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Sales Est Weight Card' = ```
+			
+			var _weight = CALCULATE(SUM(Trading[Est Weight]),FILTER(Trading,NOT(ISBLANK(Trading[Unit Sales Price]))))
+			return
+			_weight&" Unit"
+			
+			```
+		lineageTag: 8faed92c-5775-490a-9a7e-47a35b8c3d90
+
+	measure 'Est weight Sales' = CALCULATE(SUM(Trading[Est Weight]),FILTER(Trading,NOT(ISBLANK(Trading[Unit Sales Price]))))
+		lineageTag: 3c6ad109-e0c1-49da-8d96-e7365770154d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Currency Logo' = ```
+			
+			var _Currency = SELECTEDVALUE('Currency Slicer'[Currency],"US Dollar")
+			return
+			SWITCH(TRUE(),
+			_Currency ="US Dollar" ,"https://i.ibb.co/HC6xqdC/dollars.png",
+			_Currency ="Euro" ,"https://i.ibb.co/Mc6XGVM/euro.png",
+			_Currency ="British Pound" ,"https://i.ibb.co/S6F9FfW/pound.png"
+			) 
+			```
+		lineageTag: a61200e1-9093-433a-8c47-60ef71b3e154
+
+	measure 'TOP Product Sale' =
+			
+			var _grade = TOPN(1,SUMMARIZE(Grades,Grades[Grade]),[Default Sales],DESC)
+			var _maxsales = CALCULATE('Sales  Measures'[Sales(Currency)],Grades[Grade]=_grade)
+			var _allsales = CALCULATE('Sales  Measures'[Sales(Currency)],ALL(Grades))
+			var _percen = DIVIDE(_maxsales,_allsales)
+			return
+			_grade&" is the top sales Product with "&FORMAT(_maxsales,"#,##0")&" and "&FORMAT(_percen,"Percent")&" Of Product Sold"
+		lineageTag: c3d6a28f-3d30-438d-b8cd-7b1985e3bce7
+
+	measure 'Prev Month Sales' =
+			
+			CALCULATE('Sales  Measures'[Sales(Currency)],DATEADD(Dates[Date],-1,MONTH))
+		formatString: #,0
+		lineageTag: 38c9571f-d916-47c8-a4e3-cf17d08af3e4
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure Sales(Currency) = ```
+			
+			var _Currency = SELECTEDVALUE('Currency Slicer'[Currency],"US Dollar")
+			return
+			SWITCH(TRUE(),
+			_Currency ="US Dollar" ,[USD Sales],
+			_Currency ="Euro" ,[Euro Sales],
+			_Currency ="British Pound" ,[Pound Sales] 
+			)
+			```
+		formatString: #,0
+		lineageTag: 1240f265-816d-4ec4-aada-6f363301b0fe
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Days load' = ```
+			
+			var _max = max(Trading[Product load])
+			var _avg = FORMAT(AVERAGE(Trading[Product load]),"#,#0")
+			var _min = MIN(Trading[Product load])
+			return 
+			"Fastest Load : "&_min&" Days      Average Load : "&_avg&" Days Slowest Load : "&_max&" Days"
+			
+			```
+		lineageTag: f8743f05-c7ed-41f2-81e3-451e75107fee
+
+	measure 'Average Delivery Days' = AVERAGE(Trading[Days Till Load])
+		lineageTag: 7c229451-623d-41df-89f8-9a162816afa9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Drill Button Text' = ```
+			
+			VAR _issuefiltered =
+			    IF (    
+			                HASONEFILTER (Trading[Reference]),
+			        TRUE,
+			        FALSE
+			    )
+			VAR _selissue =
+			    SELECTEDVALUE ( Trading[Reference], "All Reference" )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        _issuefiltered, "See Reference : " & _selissue & " Details",
+			        "Please select a Ref from Table"
+			    )
+			```
+		lineageTag: b0ca69da-484f-4ea4-9a42-ca47d7bbf14a
+
+	measure 'Drill Navigation Ref' = ```
+			
+			
+			    IF (
+			            HASONEFILTER ( Trading[Reference] )    
+			        ,
+			        "Ref_Drill",
+			        "")
+			    
+			```
+		lineageTag: 61a4901b-f744-4c7c-99b3-38adacb2e175
+
+	partition 'Sales  Measures-16ceff64-a210-45ae-96a7-363a43b52bae' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

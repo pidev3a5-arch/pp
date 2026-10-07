@@ -1,0 +1,533 @@
+table Trading
+	lineageTag: 77ff8e49-1b9f-438b-a0c4-810a35d8f280
+
+	column CollectionType_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 822d3967-d73e-4809-bed8-4012ce79b370
+		summarizeBy: none
+		sourceColumn: CollectionType_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AManager_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6a687538-5e2d-4181-80c7-297e7e4ce2d5
+		summarizeBy: none
+		sourceColumn: AManager_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Haulier_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e01303e8-fc92-4cd0-86aa-075678bbd312
+		summarizeBy: none
+		sourceColumn: Haulier_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Buyer_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5ec74cb5-508e-46ca-92e2-8d260ff9a91b
+		summarizeBy: none
+		sourceColumn: Buyer_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Supplier_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7cbd8f8b-c23a-4ad2-8e1d-edeb8ecf3cfc
+		summarizeBy: none
+		sourceColumn: Supplier_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GradeID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 179fd18a-c4f4-4b37-b7fc-70a5225348c1
+		summarizeBy: none
+		sourceColumn: GradeID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column HC_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 95db78fb-20ae-4fb9-b852-7e5c3307d2c4
+		summarizeBy: none
+		sourceColumn: HC_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PC_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 1c851652-db12-4b42-ba78-ca985843691b
+		summarizeBy: none
+		sourceColumn: PC_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SC_ID
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b3122314-31fb-4838-8416-38746efb95ee
+		summarizeBy: none
+		sourceColumn: SC_ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Reference
+		dataType: string
+		lineageTag: 5da7ee5a-af40-4aac-9162-8a221bc43af1
+		summarizeBy: none
+		sourceColumn: Reference
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Est Load Date'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: acfb4b18-730d-4ff8-82c5-ec0b2e3956ae
+		summarizeBy: none
+		sourceColumn: Est Load Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Confirmed Load Date'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 615afcd9-f84d-4432-a22e-79e5ba2d0f21
+		summarizeBy: none
+		sourceColumn: Confirmed Load Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Delivery Date'
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: f7e12d52-437b-44c2-b213-3c5bc1354f56
+		summarizeBy: none
+		sourceColumn: Delivery Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column 'Unit Purchase Price'
+		dataType: double
+		lineageTag: 0eed5ee1-4448-438d-ae5e-3efe304b8a03
+		summarizeBy: sum
+		sourceColumn: Unit Purchase Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Unit Sales Price'
+		dataType: int64
+		formatString: 0
+		lineageTag: ef4740be-18ff-486b-b842-8929e611bd97
+		summarizeBy: sum
+		sourceColumn: Unit Sales Price
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Est Weight'
+		dataType: double
+		formatString: #,0
+		lineageTag: 01761e31-c364-493b-8aae-fc609ebef575
+		summarizeBy: sum
+		sourceColumn: Est Weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column 'Haulage Cost'
+		dataType: double
+		lineageTag: 7c2547e2-526e-491e-b57e-e57ab546d1cf
+		summarizeBy: sum
+		sourceColumn: Haulage Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Load PERNable'
+		dataType: string
+		lineageTag: cfc9a3f3-bfd0-4575-b52d-a3e550fa0972
+		summarizeBy: none
+		sourceColumn: Load PERNable
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Supplier Weight'
+		dataType: double
+		lineageTag: bfa4f061-b589-46dd-9f2b-63184809c1f7
+		summarizeBy: sum
+		sourceColumn: Total Supplier Weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Total Buyer Weight'
+		dataType: double
+		lineageTag: 76bbe310-d72c-429f-b583-8b9a685e670c
+		summarizeBy: sum
+		sourceColumn: Total Buyer Weight
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Process flow stage'
+		dataType: string
+		lineageTag: d231e321-930b-4fe5-ada2-82758e75c2e5
+		summarizeBy: none
+		sourceColumn: Process flow stage
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer Load Type'
+		dataType: string
+		lineageTag: 0fdbb2a1-b599-44dc-b26a-b797cb9ee0ab
+		summarizeBy: none
+		sourceColumn: Customer Load Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PRN Value per tonne'
+		dataType: int64
+		formatString: 0
+		lineageTag: ab2307e4-3f84-4cfd-aeea-ba8bc05fa194
+		summarizeBy: sum
+		sourceColumn: PRN Value per tonne
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Missing Currency' =
+			
+			IF(ISBLANK(Trading[SC_ID]) ||ISBLANK(Trading[PC_ID])||ISBLANK(Trading[HC_ID]),"MC","AC")
+		lineageTag: e7d8a8b1-58a4-42fc-b627-da7dca8e1352
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales(USD) = ```
+			
+			var _to= "-USD"
+			var _c = CONCATENATE(RELATED('Sale Currency'[SC]),_to)
+			var _rate=
+			IF(RELATED('Sale Currency'[SC])="US Dollar" ,1,
+			LOOKUPVALUE('Currency Rates'[From],'Currency Rates'[Currency],_c)
+			)
+			return 
+			Trading[Est Weight] * Trading[Unit Sales Price] * _rate
+			```
+		formatString: #,0.00
+		lineageTag: bff3ddbe-852d-4490-8108-49b1964af70a
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales(Euro) = ```
+			
+			var _to= "-EUR"
+			var _c = CONCATENATE(RELATED('Sale Currency'[SC]),_to)
+			var _rate=
+			IF(RELATED('Sale Currency'[SC])="Euro" ,1,
+			LOOKUPVALUE('Currency Rates'[From],'Currency Rates'[Currency],_c)
+			)
+			return 
+			Trading[Est Weight] * Trading[Unit Sales Price] * _rate
+			```
+		formatString: #,0.00
+		lineageTag: f467179e-f8e6-4cc2-ae4b-b2b481114bcf
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column Sales(Pound) = ```
+			
+			var _to= "-GBP"
+			var _c = CONCATENATE(RELATED('Sale Currency'[SC]),_to)
+			var _rate=
+			IF(RELATED('Sale Currency'[SC])="British Pound",1,
+			LOOKUPVALUE('Currency Rates'[From],'Currency Rates'[Currency],_c)
+			)
+			return 
+			Trading[Est Weight] * Trading[Unit Sales Price] * _rate
+			```
+		formatString: #,0.00
+		lineageTag: d70ca682-a66f-4c80-9c33-5a0ed13c2842
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column DC = ```
+			
+			var _c = 
+			RELATED('Sale Currency'[SC])
+			return
+			SWITCH(TRUE(),
+			_c= "British Pound","£",
+			_c= "US Dollar","$",
+			_c= "Euro","€"
+			)
+			```
+		lineageTag: 0a96e2fd-7a5c-446a-971b-30c20353346a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Purchases(USD) = ```
+			
+			var _to= "-USD"
+			var _c = CONCATENATE(RELATED('Purchase Currency'[PC]),_to)
+			var _rate=
+			IF(RELATED('Purchase Currency'[PC])="US Dollar" ,1,
+			LOOKUPVALUE('Currency Rates'[From],'Currency Rates'[Currency],_c)
+			)
+			return 
+			Trading[Est Weight] * Trading[Unit Purchase Price] * _rate
+			```
+		lineageTag: 92b0f580-ceb3-4ab0-b0fb-ea3583a08469
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Purchases(Euro) = ```
+			
+			var _to= "-EUR"
+			var _c = CONCATENATE(RELATED('Purchase Currency'[PC]),_to)
+			var _rate=
+			IF(RELATED('Purchase Currency'[PC])="Euro" ,1,
+			LOOKUPVALUE('Currency Rates'[From],'Currency Rates'[Currency],_c)
+			)
+			return 
+			Trading[Est Weight] * Trading[Unit Purchase Price] * _rate
+			```
+		lineageTag: 15330949-fa48-4c52-899b-750933c42f22
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Purchases(Pound) = ```
+			
+			var _to= "-GBP"
+			var _c = CONCATENATE(RELATED('Purchase Currency'[PC]),_to)
+			var _rate=
+			IF(RELATED('Purchase Currency'[PC])="British Pound",1,
+			LOOKUPVALUE('Currency Rates'[From],'Currency Rates'[Currency],_c)
+			)
+			return 
+			Trading[Est Weight] * Trading[Unit Purchase Price] * _rate
+			```
+		lineageTag: e94ba80a-3388-470d-aa77-a9fcf94800c7
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Days Till Load' = DATEDIFF(Trading[Est Load Date],Trading[Delivery Date],DAY)
+		formatString: 0
+		lineageTag: cc0e0a4c-93f1-4db3-aaae-995a4b362aed
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product load' =
+			
+			CALCULATE(SUM([Days Till Load]),ALLEXCEPT(Trading,Trading[GradeID])
+			)
+		formatString: 0
+		lineageTag: c173944b-bb0c-4a39-985e-5522be321899
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Missing Purchases Unit' =
+			
+			SWITCH(TRUE(),ISBLANK(Trading[Unit Purchase Price]),"Missing","Available")
+		lineageTag: 5b999b21-78ef-4348-bc9a-aa95e3e0d058
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Missing Prod Type' =
+			SWITCH(TRUE(),
+			Trading[GradeID]=39,"Missing","Available")
+		lineageTag: 529ddaa8-78a8-418e-a5ef-7528d1225fd6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column PDC = ```
+			
+			var _c = 
+			RELATED('Purchase Currency'[PC])
+			return
+			SWITCH(TRUE(),
+			_c= "British Pound","£",
+			_c= "US Dollar","$",
+			_c= "Euro","€"
+			)
+			```
+		lineageTag: 1ccdb68e-8255-48b0-afba-30e2dbf09c34
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Haulier(USD) = ```
+			
+			var _to= "-USD"
+			var _c = CONCATENATE(RELATED('Haulage Currency'[HP]),_to)
+			var _rate=
+			IF(RELATED('Haulage Currency'[HP])="US Dollar" ,1,
+			LOOKUPVALUE('Currency Rates'[From],'Currency Rates'[Currency],_c)
+			)
+			return 
+			Trading[Haulage Cost] * _rate
+			```
+		lineageTag: 8522ab0b-919a-45ea-ba18-68b629057207
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Haulier(Euro) = ```
+			
+			var _to= "-EUR"
+			var _c = CONCATENATE(RELATED('Haulage Currency'[HP]),_to)
+			var _rate=
+			IF(RELATED('Haulage Currency'[HP])="Euro" ,1,
+			LOOKUPVALUE('Currency Rates'[From],'Currency Rates'[Currency],_c)
+			)
+			return 
+			Trading[Haulage Cost] * _rate
+			```
+		lineageTag: 9cf4631b-81e2-4f2f-8638-19c880ca93f3
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Haulier(Pound) = ```
+			
+			var _to= "-GBP"
+			var _c = CONCATENATE(RELATED('Haulage Currency'[HP]),_to)
+			var _rate=
+			IF(RELATED('Haulage Currency'[HP])="British Pound" ,1,
+			LOOKUPVALUE('Currency Rates'[From],'Currency Rates'[Currency],_c)
+			)
+			return 
+			Trading[Haulage Cost] * _rate
+			```
+		lineageTag: 95f45971-64e6-4320-8231-995976d73e17
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Trading-ccf4b6b8-6aff-4d7b-ac30-7e646030b6ce = m
+		mode: import
+		queryGroup: 'Fact Tables'
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Asus\Downloads\Challenge-9-Data.xlsx"), null, true),
+				    TradingData_Table = Source{[Item="TradingData",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(TradingData_Table,{{"Reference", type text}, {"Est Load Date", type date}, {"Confirmed Load Date", type date}, {"Delivery Date", type date}, {"Grade", type text}, {"Unit Purchase Price", type number}, {"Purchase Currency", type text}, {"Unit Sales Price", Int64.Type}, {"Sale Currency", type text}, {"Supplier", type text}, {"Buyer", type text}, {"Est Weight", type number}, {"Haulier", type text}, {"Haulage Cost", type number}, {"Haulage Currency", type text}, {"Load PERNable", type text}, {"Total Supplier Weight", type number}, {"Total Buyer Weight", type number}, {"Account manager", type text}, {"Collection Type", type text}, {"Process flow stage", type text}, {"Customer Load Type", type text}, {"PRN Value per tonne", Int64.Type}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"Sale Currency"}, #"Sale Currency", {"Sale Currency"}, "Sale Currency.1", JoinKind.LeftOuter),
+				    #"Expanded Sale Currency.1" = Table.ExpandTableColumn(#"Merged Queries", "Sale Currency.1", {"SC_ID"}, {"SC_ID"}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Expanded Sale Currency.1",{"SC_ID", "Reference", "Est Load Date", "Confirmed Load Date", "Delivery Date", "Grade", "Unit Purchase Price", "Purchase Currency", "Unit Sales Price", "Sale Currency", "Supplier", "Buyer", "Est Weight", "Haulier", "Haulage Cost", "Haulage Currency", "Load PERNable", "Total Supplier Weight", "Total Buyer Weight", "Account manager", "Collection Type", "Process flow stage", "Customer Load Type", "PRN Value per tonne"}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Reordered Columns",{"Sale Currency"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Removed Columns", {"Purchase Currency"}, #"Purchase Currency", {"Purchase Currency"}, "Purchase Currency.1", JoinKind.LeftOuter),
+				    #"Expanded Purchase Currency.1" = Table.ExpandTableColumn(#"Merged Queries1", "Purchase Currency.1", {"PC_ID"}, {"PC_ID"}),
+				    #"Reordered Columns1" = Table.ReorderColumns(#"Expanded Purchase Currency.1",{"PC_ID", "SC_ID", "Reference", "Est Load Date", "Confirmed Load Date", "Delivery Date", "Grade", "Unit Purchase Price", "Purchase Currency", "Unit Sales Price", "Supplier", "Buyer", "Est Weight", "Haulier", "Haulage Cost", "Haulage Currency", "Load PERNable", "Total Supplier Weight", "Total Buyer Weight", "Account manager", "Collection Type", "Process flow stage", "Customer Load Type", "PRN Value per tonne"}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Reordered Columns1",{"Purchase Currency"}),
+				    #"Merged Queries2" = Table.NestedJoin(#"Removed Columns1", {"Haulage Currency"}, #"Haulage Currency", {"Haulage Currency"}, "Haulage Currency.1", JoinKind.LeftOuter),
+				    #"Expanded Haulage Currency.1" = Table.ExpandTableColumn(#"Merged Queries2", "Haulage Currency.1", {"HC_ID"}, {"HC_ID"}),
+				    #"Reordered Columns2" = Table.ReorderColumns(#"Expanded Haulage Currency.1",{"HC_ID", "PC_ID", "SC_ID", "Reference", "Est Load Date", "Confirmed Load Date", "Delivery Date", "Grade", "Unit Purchase Price", "Unit Sales Price", "Supplier", "Buyer", "Est Weight", "Haulier", "Haulage Cost", "Haulage Currency", "Load PERNable", "Total Supplier Weight", "Total Buyer Weight", "Account manager", "Collection Type", "Process flow stage", "Customer Load Type", "PRN Value per tonne"}),
+				    #"Removed Columns2" = Table.RemoveColumns(#"Reordered Columns2",{"Haulage Currency"}),
+				    #"Merged Queries3" = Table.NestedJoin(#"Removed Columns2", {"Grade"}, Grades, {"Grade"}, "Grades", JoinKind.LeftOuter),
+				    #"Expanded Grades" = Table.ExpandTableColumn(#"Merged Queries3", "Grades", {"GradeID"}, {"GradeID"}),
+				    #"Reordered Columns3" = Table.ReorderColumns(#"Expanded Grades",{"GradeID", "HC_ID", "PC_ID", "SC_ID", "Reference", "Est Load Date", "Confirmed Load Date", "Delivery Date", "Grade", "Unit Purchase Price", "Unit Sales Price", "Supplier", "Buyer", "Est Weight", "Haulier", "Haulage Cost", "Load PERNable", "Total Supplier Weight", "Total Buyer Weight", "Account manager", "Collection Type", "Process flow stage", "Customer Load Type", "PRN Value per tonne"}),
+				    #"Removed Columns3" = Table.RemoveColumns(#"Reordered Columns3",{"Grade"}),
+				    #"Merged Queries4" = Table.NestedJoin(#"Removed Columns3", {"Supplier"}, Suppliers, {"Supplier"}, "Suppliers", JoinKind.LeftOuter),
+				    #"Expanded Suppliers" = Table.ExpandTableColumn(#"Merged Queries4", "Suppliers", {"Supplier_ID"}, {"Supplier_ID"}),
+				    #"Reordered Columns4" = Table.ReorderColumns(#"Expanded Suppliers",{"Supplier_ID", "GradeID", "HC_ID", "PC_ID", "SC_ID", "Reference", "Est Load Date", "Confirmed Load Date", "Delivery Date", "Unit Purchase Price", "Unit Sales Price", "Supplier", "Buyer", "Est Weight", "Haulier", "Haulage Cost", "Load PERNable", "Total Supplier Weight", "Total Buyer Weight", "Account manager", "Collection Type", "Process flow stage", "Customer Load Type", "PRN Value per tonne"}),
+				    #"Removed Columns4" = Table.RemoveColumns(#"Reordered Columns4",{"Supplier"}),
+				    #"Merged Queries5" = Table.NestedJoin(#"Removed Columns4", {"Buyer"}, Buyers, {"Buyer"}, "Buyers", JoinKind.LeftOuter),
+				    #"Expanded Buyers" = Table.ExpandTableColumn(#"Merged Queries5", "Buyers", {"Buyer_ID"}, {"Buyer_ID"}),
+				    #"Reordered Columns5" = Table.ReorderColumns(#"Expanded Buyers",{"Buyer_ID", "Supplier_ID", "GradeID", "HC_ID", "PC_ID", "SC_ID", "Reference", "Est Load Date", "Confirmed Load Date", "Delivery Date", "Unit Purchase Price", "Unit Sales Price", "Buyer", "Est Weight", "Haulier", "Haulage Cost", "Load PERNable", "Total Supplier Weight", "Total Buyer Weight", "Account manager", "Collection Type", "Process flow stage", "Customer Load Type", "PRN Value per tonne"}),
+				    #"Removed Columns5" = Table.RemoveColumns(#"Reordered Columns5",{"Buyer"}),
+				    #"Replaced Errors" = Table.ReplaceErrorValues(#"Removed Columns5", {{"Haulier", "Not Available"}}),
+				    #"Merged Queries6" = Table.NestedJoin(#"Replaced Errors", {"Haulier"}, Hauliers, {"Haulier"}, "Hauliers", JoinKind.LeftOuter),
+				    #"Expanded Hauliers" = Table.ExpandTableColumn(#"Merged Queries6", "Hauliers", {"Haulier_ID"}, {"Haulier_ID"}),
+				    #"Reordered Columns6" = Table.ReorderColumns(#"Expanded Hauliers",{"Haulier_ID", "Buyer_ID", "Supplier_ID", "GradeID", "HC_ID", "PC_ID", "SC_ID", "Reference", "Est Load Date", "Confirmed Load Date", "Delivery Date", "Unit Purchase Price", "Unit Sales Price", "Est Weight", "Haulier", "Haulage Cost", "Load PERNable", "Total Supplier Weight", "Total Buyer Weight", "Account manager", "Collection Type", "Process flow stage", "Customer Load Type", "PRN Value per tonne"}),
+				    #"Removed Columns6" = Table.RemoveColumns(#"Reordered Columns6",{"Haulier"}),
+				    #"Merged Queries7" = Table.NestedJoin(#"Removed Columns6", {"Account manager"}, #"Acount Managers", {"Account manager"}, "Acount Managers", JoinKind.LeftOuter),
+				    #"Expanded Acount Managers" = Table.ExpandTableColumn(#"Merged Queries7", "Acount Managers", {"AManager_ID"}, {"AManager_ID"}),
+				    #"Reordered Columns7" = Table.ReorderColumns(#"Expanded Acount Managers",{"AManager_ID", "Haulier_ID", "Buyer_ID", "Supplier_ID", "GradeID", "HC_ID", "PC_ID", "SC_ID", "Reference", "Est Load Date", "Confirmed Load Date", "Delivery Date", "Unit Purchase Price", "Unit Sales Price", "Est Weight", "Haulage Cost", "Load PERNable", "Total Supplier Weight", "Total Buyer Weight", "Account manager", "Collection Type", "Process flow stage", "Customer Load Type", "PRN Value per tonne"}),
+				    #"Removed Columns7" = Table.RemoveColumns(#"Reordered Columns7",{"Account manager"}),
+				    #"Merged Queries8" = Table.NestedJoin(#"Removed Columns7", {"Collection Type"}, #"Collection Types", {"Collection Type"}, "Collection Types", JoinKind.LeftOuter),
+				    #"Expanded Collection Types" = Table.ExpandTableColumn(#"Merged Queries8", "Collection Types", {"CollectionType_ID"}, {"CollectionType_ID"}),
+				    #"Reordered Columns8" = Table.ReorderColumns(#"Expanded Collection Types",{"CollectionType_ID", "AManager_ID", "Haulier_ID", "Buyer_ID", "Supplier_ID", "GradeID", "HC_ID", "PC_ID", "SC_ID", "Reference", "Est Load Date", "Confirmed Load Date", "Delivery Date", "Unit Purchase Price", "Unit Sales Price", "Est Weight", "Haulage Cost", "Load PERNable", "Total Supplier Weight", "Total Buyer Weight", "Collection Type", "Process flow stage", "Customer Load Type", "PRN Value per tonne"}),
+				    #"Removed Columns8" = Table.RemoveColumns(#"Reordered Columns8",{"Collection Type"})
+				in
+				    #"Removed Columns8"
+
+	annotation PBI_ResultType = Table
+

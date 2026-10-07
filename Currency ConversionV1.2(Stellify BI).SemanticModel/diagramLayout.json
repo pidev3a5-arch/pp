@@ -1,0 +1,214 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "Grades",
+          "size": {
+            "height": 173,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 466.8904446501615,
+            "y": 409.21707333789993
+          },
+          "nodeIndex": "Trading",
+          "size": {
+            "height": 337,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 802.72736710343474,
+            "y": 0
+          },
+          "nodeIndex": "Acount Managers",
+          "size": {
+            "height": 173,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 478.5445256639594
+          },
+          "nodeIndex": "Buyers",
+          "size": {
+            "height": 173,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 714.29807874841
+          },
+          "nodeIndex": "Collection Types",
+          "size": {
+            "height": 173,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 976.31461113579439,
+            "y": 424.83187454593434
+          },
+          "nodeIndex": "Haulage Currency",
+          "size": {
+            "height": 173,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 239.2722628319797
+          },
+          "nodeIndex": "Hauliers",
+          "size": {
+            "height": 173,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 986.53135771907182,
+            "y": 623.73854307354532
+          },
+          "nodeIndex": "Purchase Currency",
+          "size": {
+            "height": 173,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 971.02513303359751,
+            "y": 231.56253860727887
+          },
+          "nodeIndex": "Sale Currency",
+          "size": {
+            "height": 173,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 860.05669935235835,
+            "y": 794.03121132009016
+          },
+          "nodeIndex": "Suppliers",
+          "size": {
+            "height": 173,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 478.86363636363626,
+            "y": 0
+          },
+          "nodeIndex": "Dates",
+          "size": {
+            "height": 337,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1632.8818181818183,
+            "y": 0
+          },
+          "nodeIndex": "Sales  Measures",
+          "size": {
+            "height": 149,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2141.0181818181813,
+            "y": 0
+          },
+          "nodeIndex": "Currency Rates",
+          "size": {
+            "height": 197,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1867.0181818181813,
+            "y": 174.90909090909082
+          },
+          "nodeIndex": "Currency Slicer",
+          "size": {
+            "height": 141.72727272727275,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2415.0181818181813,
+            "y": 0
+          },
+          "nodeIndex": "Purchases Measures",
+          "size": {
+            "height": 149,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2689.0181818181813,
+            "y": 0
+          },
+          "nodeIndex": "Profits Measures",
+          "size": {
+            "height": 149,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 70.955543900968792,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

@@ -1,0 +1,41 @@
+table 'Currency Rates'
+	lineageTag: f5cd04d7-ea9e-4e74-a514-557a54ed13f8
+
+	column Currency
+		dataType: string
+		lineageTag: 9116c6d1-5754-4f08-b72b-8a2e9de46482
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column To
+		dataType: double
+		lineageTag: 57696616-7408-4d47-a783-5d56589d0b50
+		summarizeBy: sum
+		sourceColumn: To
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column From
+		dataType: double
+		lineageTag: 26e34cfe-24b0-4345-80d8-fb287bd497ae
+		summarizeBy: sum
+		sourceColumn: From
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Currency Rates-a38dcb65-308d-4478-b91a-9517ab4e8363' = m
+		mode: import
+		source =
+				let
+				    Source = Table.Combine({#"US Dollar Rates", #"British Pound Rates", #"Euro Rates"})
+				in
+				    Source
+
+	annotation PBI_ResultType = Table
+

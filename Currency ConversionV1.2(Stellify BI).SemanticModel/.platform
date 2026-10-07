@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Currency ConversionV1.2(Stellify BI)"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "b80418ac-a5d2-4f59-b500-e13dc8d502aa"
+  }
+}

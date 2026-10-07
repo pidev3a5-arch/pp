@@ -1,0 +1,39 @@
+table 'Collection Types'
+	lineageTag: 422e0a4e-f0b8-4136-83e4-58c5c5478a71
+
+	column CollectionType_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 052d345c-2001-4c3e-b101-c2cc15a6d3ae
+		summarizeBy: none
+		sourceColumn: CollectionType_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Collection Type'
+		dataType: string
+		lineageTag: 6ebf5e07-c196-4ced-b688-bd669e6e0450
+		summarizeBy: none
+		sourceColumn: Collection Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Collection Types-8d6114fb-b231-4813-96d4-cd7e5e9d6d75' = m
+		mode: import
+		queryGroup: DimensionsTables
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Asus\Downloads\Challenge-9-Data.xlsx"), null, true),
+				    TradingData_Table = Source{[Item="TradingData",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(TradingData_Table,{{"Reference", type text}, {"Est Load Date", type date}, {"Confirmed Load Date", type date}, {"Delivery Date", type date}, {"Grade", type text}, {"Unit Purchase Price", type number}, {"Purchase Currency", type text}, {"Unit Sales Price", Int64.Type}, {"Sale Currency", type text}, {"Supplier", type text}, {"Buyer", type text}, {"Est Weight", type number}, {"Haulier", type text}, {"Haulage Cost", type number}, {"Haulage Currency", type text}, {"Load PERNable", type text}, {"Total Supplier Weight", type number}, {"Total Buyer Weight", type number}, {"Account manager", type text}, {"Collection Type", type text}, {"Process flow stage", type text}, {"Customer Load Type", type text}, {"PRN Value per tonne", Int64.Type}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"Collection Type"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Replaced Value" = Table.ReplaceValue(#"Removed Duplicates",null,"Not Available",Replacer.ReplaceValue,{"Collection Type"}),
+				    #"Added Index" = Table.AddIndexColumn(#"Replaced Value", "Index", 1, 1, Int64.Type),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Index",{{"Index", "CollectionType_ID"}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Renamed Columns",{"CollectionType_ID", "Collection Type"})
+				in
+				    #"Reordered Columns"
+
+	annotation PBI_ResultType = Table
+

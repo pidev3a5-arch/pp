@@ -1,0 +1,38 @@
+table Grades
+	lineageTag: 504658e6-3e0c-4420-b3ef-761a559f770b
+
+	column GradeID
+		dataType: int64
+		formatString: 0
+		lineageTag: e9ea3125-68e8-4297-a7d9-244366d419b5
+		summarizeBy: none
+		sourceColumn: GradeID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Grade
+		dataType: string
+		lineageTag: 7d2d8674-e494-46c5-bdd5-33a1dc2551e3
+		summarizeBy: none
+		sourceColumn: Grade
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Grades-0760c7ae-aaad-40aa-a4a9-d16e2dfc0889 = m
+		mode: import
+		queryGroup: DimensionsTables
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Asus\Downloads\Challenge-9-Data.xlsx"), null, true),
+				    TradingData_Table = Source{[Item="TradingData",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(TradingData_Table,{{"Reference", type text}, {"Est Load Date", type date}, {"Confirmed Load Date", type date}, {"Delivery Date", type date}, {"Grade", type text}, {"Unit Purchase Price", type number}, {"Purchase Currency", type text}, {"Unit Sales Price", Int64.Type}, {"Sale Currency", type text}, {"Supplier", type text}, {"Buyer", type text}, {"Est Weight", type number}, {"Haulier", type text}, {"Haulage Cost", type number}, {"Haulage Currency", type text}, {"Load PERNable", type text}, {"Total Supplier Weight", type number}, {"Total Buyer Weight", type number}, {"Account manager", type text}, {"Collection Type", type text}, {"Process flow stage", type text}, {"Customer Load Type", type text}, {"PRN Value per tonne", Int64.Type}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"Grade"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Added Index" = Table.AddIndexColumn(#"Removed Duplicates", "Index", 1, 1, Int64.Type),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Added Index",{"Index", "Grade"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns",{{"Index", "GradeID"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

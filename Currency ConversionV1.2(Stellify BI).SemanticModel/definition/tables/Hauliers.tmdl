@@ -1,0 +1,39 @@
+table Hauliers
+	lineageTag: e9625abd-cdf6-48e0-9678-75bf9aa3f056
+
+	column Haulier_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 72c99960-0187-4436-9b2b-73030264a0c8
+		summarizeBy: none
+		sourceColumn: Haulier_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Haulier
+		dataType: string
+		lineageTag: f662682b-1974-4517-be1c-eab2eb49cb9d
+		summarizeBy: none
+		sourceColumn: Haulier
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Hauliers-f942daa7-cb54-4d81-af07-ea8abc3c3a61 = m
+		mode: import
+		queryGroup: DimensionsTables
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Asus\Downloads\Challenge-9-Data.xlsx"), null, true),
+				    TradingData_Table = Source{[Item="TradingData",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(TradingData_Table,{{"Reference", type text}, {"Est Load Date", type date}, {"Confirmed Load Date", type date}, {"Delivery Date", type date}, {"Grade", type text}, {"Unit Purchase Price", type number}, {"Purchase Currency", type text}, {"Unit Sales Price", Int64.Type}, {"Sale Currency", type text}, {"Supplier", type text}, {"Buyer", type text}, {"Est Weight", type number}, {"Haulier", type text}, {"Haulage Cost", type number}, {"Haulage Currency", type text}, {"Load PERNable", type text}, {"Total Supplier Weight", type number}, {"Total Buyer Weight", type number}, {"Account manager", type text}, {"Collection Type", type text}, {"Process flow stage", type text}, {"Customer Load Type", type text}, {"PRN Value per tonne", Int64.Type}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"Haulier"}),
+				    #"Replaced Errors" = Table.ReplaceErrorValues(#"Removed Other Columns", {{"Haulier", "Not Available"}}),
+				    #"Removed Duplicates" = Table.Distinct(#"Replaced Errors"),
+				    #"Added Index" = Table.AddIndexColumn(#"Removed Duplicates", "Index", 1, 1, Int64.Type),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Index",{{"Index", "Haulier_ID"}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Renamed Columns",{"Haulier_ID", "Haulier"})
+				in
+				    #"Reordered Columns"
+
+	annotation PBI_ResultType = Table
+

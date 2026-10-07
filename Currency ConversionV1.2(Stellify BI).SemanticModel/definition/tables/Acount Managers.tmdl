@@ -1,0 +1,38 @@
+table 'Acount Managers'
+	lineageTag: e4ce39ed-c3a3-4cc7-ac39-a92bdf6defb7
+
+	column AManager_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b360481-5c75-4b87-ad19-bffd37dd8a8d
+		summarizeBy: none
+		sourceColumn: AManager_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account manager'
+		dataType: string
+		lineageTag: f452c130-7c68-43c7-a839-ac15eae0f47c
+		summarizeBy: none
+		sourceColumn: Account manager
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Acount Managers-6c758257-b368-479a-923b-5175ce8db5c5' = m
+		mode: import
+		queryGroup: DimensionsTables
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Asus\Downloads\Challenge-9-Data.xlsx"), null, true),
+				    TradingData_Table = Source{[Item="TradingData",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(TradingData_Table,{{"Reference", type text}, {"Est Load Date", type date}, {"Confirmed Load Date", type date}, {"Delivery Date", type date}, {"Grade", type text}, {"Unit Purchase Price", type number}, {"Purchase Currency", type text}, {"Unit Sales Price", Int64.Type}, {"Sale Currency", type text}, {"Supplier", type text}, {"Buyer", type text}, {"Est Weight", type number}, {"Haulier", type text}, {"Haulage Cost", type number}, {"Haulage Currency", type text}, {"Load PERNable", type text}, {"Total Supplier Weight", type number}, {"Total Buyer Weight", type number}, {"Account manager", type text}, {"Collection Type", type text}, {"Process flow stage", type text}, {"Customer Load Type", type text}, {"PRN Value per tonne", Int64.Type}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"Account manager"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Added Index" = Table.AddIndexColumn(#"Removed Duplicates", "Index", 1, 1, Int64.Type),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Index",{{"Index", "AManager_ID"}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Renamed Columns",{"AManager_ID", "Account manager"})
+				in
+				    #"Reordered Columns"
+
+	annotation PBI_ResultType = Table
+

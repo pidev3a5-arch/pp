@@ -1,0 +1,50 @@
+relationship 8fde0470-f285-4b71-a02e-9b48eb527b92
+	fromColumn: Trading.GradeID
+	toColumn: Grades.GradeID
+
+relationship 4e22cac9-e7ee-4404-92da-44f663ee6b01
+	fromColumn: Trading.PC_ID
+	toColumn: 'Purchase Currency'.PC_ID
+
+relationship 2765c3dc-8a81-44a9-b775-3e7a85df02a0
+	fromColumn: Trading.SC_ID
+	toColumn: 'Sale Currency'.SC_ID
+
+relationship 5b924601-863b-44f2-afb0-5144ce0e3c6d
+	fromColumn: Trading.Supplier_ID
+	toColumn: Suppliers.Supplier_ID
+
+relationship 3a8d3a79-483a-4498-aeeb-629510bf3301
+	fromColumn: Trading.Buyer_ID
+	toColumn: Buyers.Buyer_ID
+
+relationship 51fc65b4-8504-4151-84d6-16926138b07b
+	fromColumn: Trading.Haulier_ID
+	toColumn: Hauliers.Haulier_ID
+
+relationship 07cad53e-b20f-4fd2-9b38-b13f41102980
+	fromColumn: Trading.HC_ID
+	toColumn: 'Haulage Currency'.HC_ID
+
+relationship 993906d0-1f06-45a2-a7d9-362804383878
+	fromColumn: Trading.AManager_ID
+	toColumn: 'Acount Managers'.AManager_ID
+
+relationship 5149ae16-e247-40e2-bfc5-f003953b870e
+	fromColumn: Trading.CollectionType_ID
+	toColumn: 'Collection Types'.CollectionType_ID
+
+relationship 8f7e147f-03df-43d2-8288-db5e3708f27a
+	isActive: false
+	fromColumn: Trading.'Est Load Date'
+	toColumn: Dates.Date
+
+relationship 1fc797ae-5f2c-40c9-adb7-f33916310837
+	fromColumn: Trading.'Confirmed Load Date'
+	toColumn: Dates.Date
+
+relationship 1d6283ef-987c-4cd3-900d-46bed3c5092f
+	isActive: false
+	fromColumn: Trading.'Delivery Date'
+	toColumn: Dates.Date
+

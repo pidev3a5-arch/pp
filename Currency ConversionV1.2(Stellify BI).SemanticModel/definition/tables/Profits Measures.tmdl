@@ -1,0 +1,119 @@
+table 'Profits Measures'
+	lineageTag: 12095e00-37d1-455e-9c6d-7b9258d02aa4
+
+	measure 'USD Haulage' = SUM(Trading[Haulier(USD)])
+		lineageTag: 8e81d4e1-f387-4ac5-a49d-9198ec15437b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Euro Haulage' = SUM(Trading[Haulier(Euro)])
+		lineageTag: ae778acd-1563-4008-90a7-bb317b925927
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Pound Haulage' = SUM(Trading[Haulier(Pound)])
+		lineageTag: a7178c0d-eb54-4256-9992-56dc02ac126b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Default Haulage' = SUM(Trading[Haulage Cost])
+		lineageTag: d6cbad89-0a72-4a0b-adc0-0fb2aab8f98c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Card Haulage(Currency)' =
+			
+			var _Currency = SELECTEDVALUE('Currency Slicer'[Currency],"US Dollar")
+			return
+			SWITCH(TRUE(),
+			_Currency ="US Dollar" ,FORMAT([USD Haulage],"$#,##0"),
+			_Currency ="Euro" ,FORMAT([Euro Haulage],"€#,##0"),
+			_Currency ="British Pound" ,FORMAT([Pound Haulage] ,"£#,##0"),[Default Sales]
+			)
+		lineageTag: 3f9c40c8-ffef-4e5d-830f-8129eb267d5e
+
+	measure Haulage(Currency) = ```
+			
+			var _Currency = SELECTEDVALUE('Currency Slicer'[Currency],"US Dollar")
+			return
+			SWITCH(TRUE(),
+			_Currency ="US Dollar" ,[USD Haulage],
+			_Currency ="Euro" ,[Euro Haulage],
+			_Currency ="British Pound" ,[Pound Haulage] 
+			)
+			```
+		lineageTag: 87c1f151-bfdf-4c0d-9bc5-310027b1ffb0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Cumulative Haulage' =
+			CALCULATE(
+			    [Haulage(Currency)],
+			    FILTER(ALL(Dates),Dates[Date]<=MAX(Dates[Date])))
+		lineageTag: a9c4e39b-d8e2-4f1a-b3ed-4d1883637957
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Prev Month Haulage' =
+			
+			CALCULATE([Haulage(Currency)],DATEADD(Dates[Date],-1,MONTH))
+		lineageTag: 337f7bac-982e-4157-be59-0ffb7e2b21aa
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Card Profit' =
+			
+			var _p = 'Sales  Measures'[Sales(Currency)] - ('Purchases Measures'[Purchese(Currency)] + [Haulage(Currency)])
+			var _Currency = SELECTEDVALUE('Currency Slicer'[Currency],"US Dollar")
+			return
+			SWITCH(TRUE(),
+			_Currency ="US Dollar" ,FORMAT(_p,"$#,##0"),
+			_Currency ="Euro" ,FORMAT(_p,"€#,##0"),
+			_Currency ="British Pound" ,FORMAT(_p,"£#,##0"))
+		lineageTag: 34fe9cf8-babd-4554-941d-481c0fb89a72
+
+	measure Profit = ```
+			
+			'Sales  Measures'[Sales(Currency)] - ('Purchases Measures'[Purchese(Currency)] + [Haulage(Currency)])
+			
+			
+			```
+		formatString: #,0.00
+		lineageTag: 5c2c6670-7f04-4d29-a9b9-e4516c281994
+
+	measure 'Prev Month Profit' =
+			
+			CALCULATE('Profits Measures'[Profit],DATEADD(Dates[Date],-1,MONTH))
+		lineageTag: 50abbce9-fada-409a-b6e2-99ba271e6fe8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Margin = DIVIDE('Profits Measures'[Profit],'Sales  Measures'[Sales(Currency)])
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 7b6b7fc4-cf29-4cc5-af50-8f4dbc6ba97c
+
+	measure Status =
+			
+			IF('Profits Measures'[Profit]>0,UNICHAR(9650),UNICHAR(9660))
+		lineageTag: bfd9a665-9a5e-41dc-8da0-05a11bed80f4
+
+	measure 'Cumulative Profit' =
+			CALCULATE(
+			'Profits Measures'[Profit],
+			    FILTER(ALL(Dates),Dates[Date]<=MAX(Dates[Date])))
+		lineageTag: c29154d0-1eea-47e3-a38f-af466e6e865c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Profits Measures-5314af82-0357-44aa-b520-dae3d09ba885' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

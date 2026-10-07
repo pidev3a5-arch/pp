@@ -1,0 +1,49 @@
+table 'Sale Currency'
+	lineageTag: f344ca7d-c7f1-41f8-9885-eeae822651bc
+
+	column SC_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: b0efa61e-1976-4c63-a549-d09e04fa5e05
+		summarizeBy: none
+		sourceColumn: SC_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sale Currency'
+		dataType: string
+		lineageTag: f0525ba8-adc9-49d8-9263-dd93a11a3525
+		summarizeBy: none
+		sourceColumn: Sale Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column SC
+		dataType: string
+		lineageTag: efb44ae3-5d4f-4f55-a189-793752b82bdd
+		summarizeBy: none
+		sourceColumn: SC
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Sale Currency-92ada1c3-6ce3-471c-ae18-68efb61e0a58' = m
+		mode: import
+		queryGroup: DimensionsTables
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\Asus\Downloads\Challenge-9-Data.xlsx"), null, true),
+				    TradingData_Table = Source{[Item="TradingData",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(TradingData_Table,{{"Reference", type text}, {"Est Load Date", type date}, {"Confirmed Load Date", type date}, {"Delivery Date", type date}, {"Grade", type text}, {"Unit Purchase Price", type number}, {"Purchase Currency", type text}, {"Unit Sales Price", Int64.Type}, {"Sale Currency", type text}, {"Supplier", type text}, {"Buyer", type text}, {"Est Weight", type number}, {"Haulier", type text}, {"Haulage Cost", type number}, {"Haulage Currency", type text}, {"Load PERNable", type text}, {"Total Supplier Weight", type number}, {"Total Buyer Weight", type number}, {"Account manager", type text}, {"Collection Type", type text}, {"Process flow stage", type text}, {"Customer Load Type", type text}, {"PRN Value per tonne", Int64.Type}}),
+				    #"Removed Other Columns" = Table.SelectColumns(#"Changed Type",{"Sale Currency"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Other Columns"),
+				    #"Removed Alternate Rows" = Table.AlternateRows(#"Removed Duplicates",2,1,3),
+				    #"Added Index" = Table.AddIndexColumn(#"Removed Alternate Rows", "Index", 1, 1, Int64.Type),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Index",{{"Index", "SC_ID"}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Renamed Columns",{"SC_ID", "Sale Currency"}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Reordered Columns", "SC", each if [Sale Currency] = "(€) - Euro" then "Euro" else if [Sale Currency] = "($) - US Dollar" then "US Dollar" else if [Sale Currency] = "(£) - Pound Sterling" then "British Pound" else null),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Conditional Column",{{"SC", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_ResultType = Table
+

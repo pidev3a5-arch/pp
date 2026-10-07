@@ -1,0 +1,22 @@
+table 'Currency Slicer'
+	lineageTag: a28b62bf-ece9-49bf-82f0-16d0bfce4a7c
+
+	column Currency
+		dataType: string
+		lineageTag: 58b5abd7-a5a9-4619-b82b-5996a6e3b939
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Currency Slicer-516db5f3-9062-4b12-83c8-69ffd4f79aa0' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i45WCg1WcMnPyUksUorViVZyLS3KBzOcijJLMoszFALyS/NSlGJjAQ==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Currency = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Currency", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
