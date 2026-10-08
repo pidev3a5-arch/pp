@@ -126,31 +126,6 @@
       "type": "RegisteredResources",
       "items": [
         {
-          "name": "arrow-up-line89603441235571.png",
-          "path": "arrow-up-line89603441235571.png",
-          "type": "Image"
-        },
-        {
-          "name": "Currency_RSH1_-_UI_Concept_P1523708726851086.svg",
-          "path": "Currency_RSH1_-_UI_Concept_P1523708726851086.svg",
-          "type": "Image"
-        },
-        {
-          "name": "Currency_RSH1_-_UI_Concept_P2.16560978002480953.svg",
-          "path": "Currency_RSH1_-_UI_Concept_P2.16560978002480953.svg",
-          "type": "Image"
-        },
-        {
-          "name": "Currency_RSH1_-_UI_Concept_P2021592771914752396.svg",
-          "path": "Currency_RSH1_-_UI_Concept_P2021592771914752396.svg",
-          "type": "Image"
-        },
-        {
-          "name": "Currency_RSH1_-_UI_Concept_P30977278405192048.svg",
-          "path": "Currency_RSH1_-_UI_Concept_P30977278405192048.svg",
-          "type": "Image"
-        },
-        {
           "name": "Theme_14_-_Dark5983702742815273.json",
           "path": "Theme_14_-_Dark5983702742815273.json",
           "type": "CustomTheme"
